@@ -44,7 +44,10 @@ pub struct InitCounter<'info> {
 #[derive(Accounts)]
 pub struct UpdateCounter<'info> {
 
-    #[account(mut)]
+    #[account(
+        mut,
+        has_one = owner,
+    )]
     pub counter: Account<'info, Counter>,
 
     #[account(mut)]
