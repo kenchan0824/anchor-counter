@@ -28,4 +28,19 @@ describe("Anchor Counter Program", () => {
     assert.ok(counter.count.toNumber() === 0);
   });
 
+  it("update() should increase counter by 1", async () => {
+    let counter = await program.account.counter.fetch(counterPK);
+    const initCount = counter.count.toNumber()
+
+    await program.methods.update()
+      .accounts({
+        owner,
+        counter: counterPK
+      })
+      .rpc();
+
+    counter = await program.account.counter.fetch(counterPK);
+    assert.ok(counter.count.toNumber() === initCount + 1);
+  });
+  
 });
