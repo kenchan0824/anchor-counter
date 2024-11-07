@@ -1,4 +1,5 @@
 use anchor_lang::prelude::*;
+use anchor_safe_math::{SafeMath};
 
 declare_id!("Cf9qZuP2WabAWALeqXTKDTnfu8HMqSczFK8AFBDmnzVS");
 
@@ -16,11 +17,10 @@ pub mod counter {
 
     pub fn update(ctx: Context<UpdateCounter>) -> Result<()> {
         let counter = &mut ctx.accounts.counter;
-        counter.count = counter.count + 1;
+        counter.count = counter.count.safe_add(1)?;
 
         Ok(())
     }
-
 }
 
 #[derive(Accounts)]

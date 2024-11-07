@@ -17,3 +17,4 @@ default = []
 
 [dependencies]
 anchor-lang = "0.29.0"
+anchor-safe-math = "0.5.1"
